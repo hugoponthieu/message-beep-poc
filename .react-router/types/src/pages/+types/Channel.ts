@@ -1,17 +1,18 @@
 // React Router generated types for route:
-// catchall.tsx
+// ./pages/Channel.tsx
 
 import type * as T from "react-router/route-module"
 
-import type { Info as Parent0 } from "./root.js"
+import type { Info as Parent0 } from "../../+types/root.js"
+import type { Info as Parent1 } from "../../+types/component.js"
 
-type Module = typeof import("../catchall.js")
+type Module = typeof import("../Channel.js")
 
 export type Info = {
-  parents: [Parent0],
-  id: "catchall"
-  file: "catchall.tsx"
-  path: "*?"
+  parents: [Parent0, Parent1],
+  id: "pages/Channel"
+  file: "./pages/Channel.tsx"
+  path: "channel"
   params: {} & { [key: string]: string | undefined }
   module: Module
   loaderData: T.CreateLoaderData<Module>
