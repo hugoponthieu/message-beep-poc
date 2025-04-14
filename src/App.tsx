@@ -9,24 +9,25 @@ import { Outlet, useNavigate } from "react-router";
 function App() {
   const auth = useAuth();
   const navigate = useNavigate();
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    const savedMode = localStorage.getItem("darkMode");
+    return savedMode ? JSON.parse(savedMode) : false;
+  });
 
   useEffect(() => {
-    // Set dark mode based on system preference
-    if (
-      window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-    ) {
+    if (isDarkMode) {
       document.documentElement.classList.add("dark");
-      setIsDarkMode(true);
+    } else {
+      document.documentElement.classList.remove("dark");
     }
-  }, []);
+  }, [isDarkMode]);
 
   const toggleDarkMode = () => {
-    document.documentElement.classList.toggle("dark");
-    setIsDarkMode(!isDarkMode);
+    const newMode = !isDarkMode;
+    document.documentElement.classList.toggle("dark", newMode);
+    setIsDarkMode(newMode);
+    localStorage.setItem("darkMode", JSON.stringify(newMode));
   };
-
   useEffect(() => {
     if (auth.isAuthenticated) {
       navigate("/channel");
@@ -34,7 +35,7 @@ function App() {
   }, [auth.isAuthenticated, navigate]);
 
   return (
-    <div className="flex flex-col bg-background">
+    <div className="flex flex-col bg-background h-screen">
       <div className="flex flex-row justify-start p-2 items-center w-full gap-6">
         <div className="flex flex-row items-center gap-2">
           <Moon />
