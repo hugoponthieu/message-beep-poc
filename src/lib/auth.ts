@@ -11,7 +11,9 @@ export default class Jwt {
   }
 
   getToken(): string | null {
-    const tokenKey = 'oidc.user:http://localhost:8080/realms/beep:test-client';
+    const tokenKey = `oidc.user:${import.meta.env.VITE_AUTHORITY_URL}:${
+      import.meta.env.VITE_CLIENT_ID
+    }`;
     const storedData = localStorage.getItem(tokenKey);
     if (storedData) {
       const parsedData = JSON.parse(storedData);
@@ -20,4 +22,3 @@ export default class Jwt {
     return null;
   }
 }
-

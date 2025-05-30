@@ -4,9 +4,9 @@ import { AuthProvider, AuthProviderProps } from "react-oidc-context";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const oidcConfig: AuthProviderProps = {
-  authority: "http://localhost:8080/realms/beep",
-  client_id: "test-client",
-  redirect_uri: "http://localhost:5173/",
+  authority: import.meta.env.VITE_AUTHORITY_URL ,  // "http://localhost:8080/realms/beep",
+  client_id: import.meta.env.VITE_CLIENT_ID, // "test-client",
+  redirect_uri: import.meta.env.VITE_REDIRECT_URI, // "http://localhost:5173/",
   automaticSilentRenew: true,
   response_type: "code",
   scope: "openid profile email",
